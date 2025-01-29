@@ -1,0 +1,23 @@
+/* Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom variables */
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-rgb: 0, 0, 0;
+}
+
+/* Global styles */
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+}
+
+/* Additional custom styles */
+@layer components {
+  .seal-card {
+    @apply relative overflow-hidden rounded-xl;
+  }
+} 
