@@ -1,2 +1,1 @@
-public/images/ghost.mp4 filter=lfs diff=lfs merge=lfs -text
 public/images/ghost.mp4 !text !filter !merge !diff
