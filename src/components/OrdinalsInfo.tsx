@@ -2,7 +2,7 @@
 
 export default function OrdinalsInfo() {
   const totalSupply = 100;
-  const remaining = 73;
+  const remaining = 69;
   const minted = totalSupply - remaining;
   const mintedPercentage = (minted / totalSupply) * 100;
 
