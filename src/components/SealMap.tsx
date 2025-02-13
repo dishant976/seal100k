@@ -11,13 +11,7 @@ import L from "leaflet";
 const createIcon = (color: string) =>
   L.divIcon({
     className: "custom-pin",
-    html: `<div 
-      style="background: ${color}; 
-             width: 20px; 
-             height: 20px; 
-             border-radius: 50%; 
-             box-shadow: 0 0 10px ${color};">
-      </div>`,
+    html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 10px ${color};"></div>`,
   });
 
 // Heading in Nordic script that switches to English on hover
@@ -36,26 +30,22 @@ const NordicText = () => {
 };
 
 const SealMap = () => {
-  // State to track the currently selected seal color for overlay
+  // State to track the current overlay color for the map
   const [mapColor, setMapColor] = useState<string>("transparent");
 
   return (
     <div className={styles.mapContainer}>
-      {/* Black background heading at the top in Nordic/English toggle */}
+      {/* Nordic heading with a black background */}
       <NordicText />
 
-      {/* Semi-transparent overlay that changes color based on the selected seal */}
-      <div
-        className={styles.mapOverlay}
-        style={{ backgroundColor: mapColor }}
-      ></div>
+      {/* Semi-transparent overlay that tints the map based on the selected seal */}
+      <div className={styles.mapOverlay} style={{ backgroundColor: mapColor }}></div>
 
       <MapContainer center={[20, 10]} zoom={2} className={styles.map}>
         {/* Carto basemap with no labels */}
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors 
-            &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          attribution='&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
         />
 
         {sealsData.map((seal) => {
@@ -74,7 +64,7 @@ const SealMap = () => {
                   e.target.getElement().classList.remove("hover-glow");
                 },
                 click: () => {
-                  // If your data has seal.color, use it. Otherwise default to a gold tint.
+                  // If the seal object includes a 'color' property, use it; otherwise default to a gold tint.
                   const colorOverlay = (seal as any).color
                     ? (seal as any).color
                     : "rgba(255, 215, 0, 0.3)";
@@ -82,13 +72,14 @@ const SealMap = () => {
                 },
               }}
             >
-              <Popup className={styles.sealPopup}>
+              <Popup className={styles.sealPopup} maxWidth={600} minWidth={400}>
                 {/* Seal name in bold, underlined, centered */}
                 <h2
                   style={{
                     textAlign: "center",
                     fontWeight: "bold",
                     textDecoration: "underline",
+                    fontSize: "1.5rem",
                   }}
                 >
                   {seal.name}
@@ -99,7 +90,7 @@ const SealMap = () => {
                   <strong>Origin:</strong> {seal.origin}
                 </p>
 
-                {/* Location name (if present) */}
+                {/* Location name (using seal.locationname) */}
                 {seal.locationname && (
                   <p>
                     <strong>Location:</strong> {seal.locationname}
@@ -118,7 +109,7 @@ const SealMap = () => {
                     alt={seal.name}
                     style={{
                       display: "block",
-                      width: "400px", // Increased size
+                      width: "500px",
                       height: "auto",
                       margin: "10px 0",
                       border: "2px solid gold",
@@ -126,7 +117,7 @@ const SealMap = () => {
                   />
                 )}
 
-                {/* Full history text at once */}
+                {/* Full history text */}
                 {seal.history && <p>{seal.history}</p>}
               </Popup>
             </Marker>
