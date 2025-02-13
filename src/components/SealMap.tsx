@@ -102,7 +102,7 @@ const SealMap = () => {
                 {/* Location name (if present) */}
                 {seal.locationName && (
                   <p>
-                    <strong>Location:</strong> {seal.locationName}
+                    <strong>Location:</strong> {seal.locationname}
                   </p>
                 )}
 
