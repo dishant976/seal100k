@@ -14,10 +14,9 @@ const createIcon = (color: string) =>
     html: `<div style="background: ${color}; width: 20px; height: 20px; border-radius: 50%; box-shadow: 0 0 10px ${color};"></div>`,
   });
 
-// Heading in Nordic script that switches to English on hover
+// Nordic text heading that toggles to English on hover
 const NordicText = () => {
   const [isHovered, setIsHovered] = useState(false);
-
   return (
     <h1
       className={styles.nordicFont}
@@ -64,7 +63,7 @@ const SealMap = () => {
                   e.target.getElement().classList.remove("hover-glow");
                 },
                 click: () => {
-                  // If the seal object includes a 'color' property, use it; otherwise default to a gold tint.
+                  // Use the seal's color property if available, or default to a gold tint.
                   const colorOverlay = (seal as any).color
                     ? (seal as any).color
                     : "rgba(255, 215, 0, 0.3)";
